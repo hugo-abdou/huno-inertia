@@ -12,6 +12,9 @@ hero:
     - theme: alt
       text: API Reference
       link: /api
+    - theme: alt
+      text: Read Blog
+      link: /blog/
 
 features:
   - title: Hono Native
