@@ -1,0 +1,54 @@
+{
+  "name": "hono-inertia",
+  "version": "0.1.0",
+  "description": "A small Inertia.js server-side adapter for Hono.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "hono",
+    "inertia",
+    "inertiajs",
+    "adapter"
+  ],
+  "homepage": "https://github.com/hugo-abdou/hono-inertia#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugo-abdou/hono-inertia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hugo-abdou/hono-inertia/issues"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "bun run --hot examples/basic/src/index.ts",
+    "docs:build": "vitepress build docs",
+    "docs:dev": "vitepress dev docs --host 127.0.0.1",
+    "docs:preview": "vitepress preview docs --host 127.0.0.1",
+    "example": "bun run dev",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "prepack": "bun run typecheck && bun run test && bun run build"
+  },
+  "peerDependencies": {
+    "hono": ">=4"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "hono": "^4.12.21",
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4"
+  }
+}

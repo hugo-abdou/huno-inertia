@@ -1,0 +1,134 @@
+# hono-inertia
+
+A small server-side Inertia.js adapter for [Hono](https://hono.dev/).
+
+It returns an HTML root view for first-page visits and Inertia page JSON for
+requests with `X-Inertia: true`. It is framework-client agnostic: use it with
+the Inertia React, Vue, or Svelte client in your frontend bundle.
+
+## Install
+
+```sh
+bun add hono-inertia hono
+```
+
+```sh
+npm install hono-inertia hono
+```
+
+## Quick Start
+
+```ts
+import { Hono } from "hono";
+import { createInertia } from "hono-inertia";
+
+const app = new Hono();
+const inertia = createInertia({
+  version: "asset-v1",
+  sharedProps: {
+    appName: "My app",
+  },
+});
+
+app.get("/", (c) => {
+  return inertia.render(c, "Home", {
+    message: "Hello from Hono",
+  });
+});
+
+export default app;
+```
+
+## Custom Root View
+
+Use a TSX root view when you want a Laravel-style root template.
+
+```tsx
+import type { InertiaRootViewProps } from "hono-inertia";
+
+export const RootView = ({ id, page, title }: InertiaRootViewProps) => (
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{title}</title>
+    </head>
+    <body>
+      <div id={id} data-page={JSON.stringify(page)} />
+    </body>
+  </html>
+);
+```
+
+```ts
+const inertia = createInertia({
+  rootView: RootView,
+  title: (page) => `${page.component} - My app`,
+});
+```
+
+## Props
+
+```ts
+import { always, lazy, optional } from "hono-inertia";
+
+app.get("/users", (c) =>
+  inertia.render(c, "Users/Index", {
+    users: lazy(() => loadUsers()),
+    flash: always(() => getFlash(c)),
+    filters: optional(() => getFilters(c)),
+  }),
+);
+```
+
+- Plain values are included on full visits.
+- Functions are lazy and only resolved when included.
+- `always()` is included on full and partial visits unless explicitly excluded.
+- `optional()` is only included when requested by a partial reload.
+
+## Redirects
+
+```ts
+app.post("/logout", (c) => inertia.redirect(c, "/"));
+app.get("/billing", (c) => inertia.location(c, "https://billing.example.com"));
+```
+
+`redirect()` defaults to `303` for Inertia requests. `location()` returns the
+Inertia external redirect response: `409` with `X-Inertia-Location`.
+
+## Documentation
+
+- [Getting started](docs/getting-started.md)
+- [Root views](docs/root-views.md)
+- [API reference](docs/api.md)
+- [Props](docs/props.md)
+- [Redirects](docs/redirects.md)
+- [Protocol behavior](docs/protocol.md)
+- [Testing](docs/testing.md)
+- [Examples](docs/examples.md)
+
+## Development
+
+```sh
+bun install
+bun run typecheck
+bun run test
+bun run build
+bun run dev
+```
+
+The example server runs from `examples/basic`.
+
+## Docs Site
+
+View the docs in a browser with VitePress:
+
+```sh
+bun run docs:dev
+```
+
+Then open the local URL printed by VitePress, usually:
+
+```txt
+http://127.0.0.1:5173
+```
