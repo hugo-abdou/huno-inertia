@@ -1,5 +1,7 @@
 # hono-inertia
 
+![hono-inertia banner](https://hugo-abdou.github.io/hono-inertia/hono-inertia-banner.png)
+
 A small server-side Inertia.js adapter for [Hono](https://hono.dev/).
 
 It returns an HTML root view for first-page visits and Inertia page JSON for
@@ -100,14 +102,14 @@ external redirect response: `409` with `X-Inertia-Location`.
 
 ## Documentation
 
-- [Getting started](docs/getting-started.md)
-- [Root views](docs/root-views.md)
-- [API reference](docs/api.md)
-- [Props](docs/props.md)
-- [Redirects](docs/redirects.md)
-- [Protocol behavior](docs/protocol.md)
-- [Testing](docs/testing.md)
-- [Examples](docs/examples.md)
+- [Getting started](https://hugo-abdou.github.io/hono-inertia/getting-started)
+- [Root views](https://hugo-abdou.github.io/hono-inertia/root-views)
+- [API reference](https://hugo-abdou.github.io/hono-inertia/api)
+- [Props](https://hugo-abdou.github.io/hono-inertia/props)
+- [Redirects](https://hugo-abdou.github.io/hono-inertia/redirects)
+- [Protocol behavior](https://hugo-abdou.github.io/hono-inertia/protocol)
+- [Testing](https://hugo-abdou.github.io/hono-inertia/testing)
+- [Examples](https://hugo-abdou.github.io/hono-inertia/examples)
 
 ## Development
 

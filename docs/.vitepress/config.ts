@@ -55,5 +55,9 @@ export default defineConfig({
       },
     ],
     socialLinks: [{ icon: "github", link: "https://github.com/hugo-abdou/hono-inertia" }],
+    footer: {
+      message: "Released under the MIT License.",
+      copyright: "Copyright © 2026-present Hugo Abdou.",
+    },
   },
 });

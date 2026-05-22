@@ -1,21 +1,29 @@
 name: Release
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v*.*.*"
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag. Defaults to v<package.json version>."
+        required: false
+        type: string
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
   publish:
-    name: Publish to npm
+    name: Create GitHub Release and Publish to npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -41,7 +49,57 @@ jobs:
       - name: Verify package contents
         run: npm pack --dry-run
 
+      - name: Resolve release tag
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ -n "$RELEASE_INPUT_TAG" ]; then
+            TAG="$RELEASE_INPUT_TAG"
+          else
+            TAG="v$VERSION"
+          fi
+
+          if [ "$TAG" != "v$VERSION" ]; then
+            echo "Tag $TAG does not match package version v$VERSION"
+            exit 1
+          fi
+
+          echo "PACKAGE_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=$TAG" >> "$GITHUB_ENV"
+        env:
+          RELEASE_INPUT_TAG: ${{ github.event.inputs.tag }}
+
+      - name: Ensure git tag exists
+        run: |
+          if git rev-parse "$RELEASE_TAG" >/dev/null 2>&1; then
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "$RELEASE_TAG"
+          git push origin "$RELEASE_TAG"
+
+      - name: Create GitHub Release
+        run: |
+          gh release view "$RELEASE_TAG" >/dev/null 2>&1 || \
+            gh release create "$RELEASE_TAG" \
+              --verify-tag \
+              --title "$RELEASE_TAG" \
+              --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Check npm version
+        id: npm-version
+        run: |
+          if npm view "hono-inertia@$PACKAGE_VERSION" version >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish package
+        if: steps.npm-version.outputs.published == 'false'
         run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
