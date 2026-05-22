@@ -40,7 +40,7 @@ jobs:
       - name: Build docs
         run: bun run docs:build
         env:
-          DOCS_BASE: /huno-inertia/
+          DOCS_BASE: /hono-inertia/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

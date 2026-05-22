@@ -7,7 +7,7 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
   sitemap: {
-    hostname: "https://hugo-abdou.github.io/huno-inertia/",
+    hostname: "https://hugo-abdou.github.io/hono-inertia/",
   },
   head: [
     ["meta", { name: "author", content: "hono-inertia contributors" }],
@@ -54,8 +54,6 @@ export default defineConfig({
         ],
       },
     ],
-    socialLinks: [
-      { icon: "github", link: "https://github.com/hugo-abdou/huno-inertia" },
-    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/hugo-abdou/hono-inertia" }],
   },
 });

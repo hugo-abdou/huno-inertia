@@ -35,7 +35,7 @@ jobs:
       - name: Build docs
         run: bun run docs:build
         env:
-          DOCS_BASE: /huno-inertia/
+          DOCS_BASE: /hono-inertia/
 
       - name: Smoke test package import
         run: bun --eval "import { createInertia, always, lazy, optional } from './dist/index.js'; if (typeof createInertia !== 'function' || typeof always !== 'function' || typeof lazy !== 'function' || typeof optional !== 'function') throw new Error('Invalid package exports')"
