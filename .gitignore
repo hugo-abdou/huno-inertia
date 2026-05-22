@@ -4,3 +4,6 @@ node_modules/
 # build output
 dist/
 coverage/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/.vitepress/.temp/

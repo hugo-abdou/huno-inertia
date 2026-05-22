@@ -30,7 +30,7 @@ _sfc_main$14.setup = (props, ctx) => {
 function deserializeFunctions(r) {
   return Array.isArray(r) ? r.map(deserializeFunctions) : typeof r == "object" && r !== null ? Object.keys(r).reduce((t, n) => (t[n] = deserializeFunctions(r[n]), t), {}) : typeof r == "string" && r.startsWith("_vp-fn_") ? new Function(`return ${r.slice(7)}`)() : r;
 }
-const siteData = deserializeFunctions(JSON.parse('{"lang":"en-US","dir":"ltr","title":"hono-inertia","description":"Inertia.js server-side adapter for Hono","base":"/","head":[],"router":{"prefetchLinks":true},"appearance":true,"themeConfig":{"search":{"provider":"local"},"nav":[{"text":"Guide","link":"/getting-started"},{"text":"API","link":"/api"},{"text":"Examples","link":"/examples"}],"sidebar":[{"text":"Guide","items":[{"text":"Getting Started","link":"/getting-started"},{"text":"Root Views","link":"/root-views"},{"text":"Props","link":"/props"},{"text":"Redirects","link":"/redirects"}]},{"text":"Reference","items":[{"text":"API","link":"/api"},{"text":"Protocol","link":"/protocol"},{"text":"Testing","link":"/testing"},{"text":"Examples","link":"/examples"}]}],"socialLinks":[{"icon":"github","link":"https://github.com/your-name/hono-inertia"}]},"locales":{},"scrollOffset":134,"cleanUrls":true}'));
+const siteData = deserializeFunctions(JSON.parse('{"lang":"en-US","dir":"ltr","title":"hono-inertia","description":"Inertia.js server-side adapter for Hono","base":"/hono-inertia/","head":[],"router":{"prefetchLinks":true},"appearance":true,"themeConfig":{"search":{"provider":"local"},"nav":[{"text":"Guide","link":"/getting-started"},{"text":"API","link":"/api"},{"text":"Examples","link":"/examples"}],"sidebar":[{"text":"Guide","items":[{"text":"Getting Started","link":"/getting-started"},{"text":"Root Views","link":"/root-views"},{"text":"Props","link":"/props"},{"text":"Redirects","link":"/redirects"}]},{"text":"Reference","items":[{"text":"API","link":"/api"},{"text":"Protocol","link":"/protocol"},{"text":"Testing","link":"/testing"},{"text":"Examples","link":"/examples"}]}],"socialLinks":[{"icon":"github","link":"https://github.com/your-name/hono-inertia"}]},"locales":{},"scrollOffset":134,"cleanUrls":true}'));
 const __vite_import_meta_env__ = {};
 const EXTERNAL_URL_RE = /^(?:[a-z]+:|\/\/)/i;
 const APPEARANCE_KEY = "vitepress-theme-appearance";
@@ -200,7 +200,7 @@ function pathToFile(path) {
   pagePath = pagePath.replace(/\/$/, "/index");
   {
     if (inBrowser) {
-      const base = "/";
+      const base = "/hono-inertia/";
       pagePath = sanitizeFileName(pagePath.slice(base.length).replace(/\//g, "_") || "index") + ".md";
       let pageHash = __VP_HASH_MAP__[pagePath.toLowerCase()];
       if (!pageHash) {
@@ -3102,7 +3102,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarSearch",
   __ssrInlineRender: true,
   setup(__props) {
-    const VPLocalSearchBox = defineAsyncComponent(() => import("./VPLocalSearchBox.DyLU_yyn.js"));
+    const VPLocalSearchBox = defineAsyncComponent(() => import("./VPLocalSearchBox.CUlbpjqP.js"));
     const VPAlgoliaSearchBox = () => null;
     const { theme: theme2 } = useData();
     const loaded = ref(false);

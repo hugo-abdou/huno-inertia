@@ -3,6 +3,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "hono-inertia",
   description: "Inertia.js server-side adapter for Hono",
+  base: process.env.DOCS_BASE ?? "/",
   cleanUrls: true,
   themeConfig: {
     search: {

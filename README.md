@@ -134,3 +134,7 @@ Then open the local URL printed by VitePress, usually:
 ```txt
 http://127.0.0.1:5173
 ```
+
+Deploy the docs to GitHub Pages by enabling Pages in the repository settings
+with **Build and deployment > Source > GitHub Actions**. The included workflow
+builds the VitePress site and publishes `docs/.vitepress/dist`.
