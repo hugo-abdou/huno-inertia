@@ -1,6 +1,6 @@
 # hono-inertia
 
-![hono-inertia banner](https://hugo-abdou.github.io/hono-inertia/hono-inertia-banner.png)
+![hono-inertia banner](https://hugo-abdou.github.io/hono-inertia/hono-inertia-banner.webp)
 
 A small server-side Inertia.js adapter for [Hono](https://hono.dev/).
 

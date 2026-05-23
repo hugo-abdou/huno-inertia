@@ -16,7 +16,7 @@ hero:
       text: API Reference
       link: /api
   image:
-    src: /hono-inertia-banner.png
+    src: /hono-inertia-banner.webp
     alt: hono-inertia banner
 
 features:
